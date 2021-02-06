@@ -1,0 +1,12 @@
+{
+  "name": "exercice-antd-pro",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "postinstall": "npm install --prefix server && npm install --prefix client",
+    "server": "npm start --prefix server",
+    "client": "npm start --prefix client"
+  },
+  "author": "",
+  "license": "ISC"
+}
