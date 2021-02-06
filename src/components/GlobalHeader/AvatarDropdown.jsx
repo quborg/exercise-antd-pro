@@ -6,51 +6,33 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 class AvatarDropdown extends React.Component {
-  onMenuClick = (event) => {
-    const { key } = event;
-
-    if (key === 'logout') {
-      const { dispatch } = this.props;
-
-      if (dispatch) {
-        dispatch({
-          type: 'login/logout',
-        });
-      }
-
-      return;
-    }
-
-    history.push(`/account/${key}`);
-  };
-
   render() {
     const {
       currentUser = {
-        avatar: '',
-        name: '',
+        avatar: 'https://avatars.githubusercontent.com/u/1706070',
+        name: 'quborg',
       },
       menu,
     } = this.props;
     const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+      <Menu className={styles.menu} selectedKeys={[]} onClick={()=>{}}>
         {menu && (
           <Menu.Item key="center">
             <UserOutlined />
-            个人中心
+            Personal center
           </Menu.Item>
         )}
         {menu && (
           <Menu.Item key="settings">
             <SettingOutlined />
-            个人设置
+            Personal settings
           </Menu.Item>
         )}
         {menu && <Menu.Divider />}
 
         <Menu.Item key="logout">
           <LogoutOutlined />
-          退出登录
+          sign out
         </Menu.Item>
       </Menu>
     );
@@ -75,6 +57,4 @@ class AvatarDropdown extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({
-  currentUser: user.currentUser,
-}))(AvatarDropdown);
+export default AvatarDropdown

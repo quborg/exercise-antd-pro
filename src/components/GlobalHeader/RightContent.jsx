@@ -23,8 +23,8 @@ const GlobalHeaderRight = (props) => {
     <div className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
-        defaultValue="umi ui"
+        placeholder="Site Search"
+        defaultValue="..search ?"
         options={[
           {
             label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>,
@@ -46,7 +46,7 @@ const GlobalHeaderRight = (props) => {
         //   //console.log('input', value);
         // }}
       />
-      <Tooltip title="使用文档">
+      <Tooltip title="Use documentation">
         <a
           style={{
             color: 'inherit',
