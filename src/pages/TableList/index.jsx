@@ -7,6 +7,7 @@ import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
+import DATA from './DATA';
 import { queryRule, updateRule, addRule, removeRule } from './service';
 /**
  * 添加节点
@@ -231,7 +232,9 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        request={(params, sorter, filter) =>
+          new Promise((resolve) => resolve({ ...params, sorter, filter, data: DATA }))
+        }
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {

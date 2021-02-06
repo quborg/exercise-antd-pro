@@ -13,7 +13,7 @@ export default [
           },
           {
             path: '/home',
-            name: 'Home',
+            name: 'home',
             icon: 'smile',
             component: './Welcome',
           },
