@@ -1,17 +1,19 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Input, Drawer } from 'antd';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
 import ProDescriptions from '@ant-design/pro-descriptions';
 import UpdateForm from './components/UpdateForm';
-import DATA from './DATA';
 
 const handleAdd = async (fields) => true;
 const handleUpdate = async (fields) => true;
 const handleRemove = async (selectedRows) => true;
+
+const URL = 'http://localhost:3000/api/list';
+const HEADERS = { 'Content-Type': 'application/json' };
 
 const TableList = () => {
   const [createModalVisible, handleModalVisible] = useState(false);
@@ -20,8 +22,22 @@ const TableList = () => {
   const actionRef = useRef();
   const [currentRow, setCurrentRow] = useState();
   const [selectedRowsState, setSelectedRows] = useState([]);
-
   const intl = useIntl();
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = () =>
+    fetch(URL, { HEADERS })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+
   const columns = [
     {
       title: (
@@ -164,9 +180,7 @@ const TableList = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
           </Button>,
         ]}
-        request={(params, sorter, filter) =>
-          new Promise((resolve) => resolve({ ...params, sorter, filter, data: DATA }))
-        }
+        request={(params, sorter, filter) => new Promise((resolve) => resolve({ ...params, sorter, filter, data }))}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => {
